@@ -9,12 +9,5 @@ namespace TaxAPI.Models
 
         /// <param name="excessValue"> Nullable value: if calculating percentage of excess, how much is the excess </param>
         public double? excessValue { get; set; }
-
-        public  medicareBrackets { get; set; }
-
-        public MedicareLevyItems()
-        {
-            medicareBrackets = new MedicareBrackets();
-        }
     }
 }

@@ -15,10 +15,11 @@ namespace TaxAPI.Calculators
 
         private SalaryItems getMedicareLevy(SalaryItems salary)
         {
-            //define the medicare bracket from TI
-            MedicareLevyItems medicareLevyItems = new MedicareLevyItems();
+            //define the deduction parameter object
+            DeductionParameterItems deductionParameterItems = new DeductionParameterItems();
+            MedicareBrackets medicareBrackets = new MedicareBrackets();
 
-            medicareLevyItems = defineMedicareBracket(medicareLevyItems, salary.taxableIncome);
+            medicareBrackets = defineMedicareBracket(medicareLevyItems, salary.taxableIncome, deductionParameterItems);
 
             // Calculate based on the defined Medicare bracket values
             salary.deductionItems.medicareLevy = calculateMedicareLevy(medicareLevyItems, salary.taxableIncome);
@@ -44,19 +45,19 @@ namespace TaxAPI.Calculators
             return Math.Ceiling(medicareLevy);
         }
 
-        private MedicareLevyItems defineMedicareBracket(MedicareLevyItems medicareLevyItems, double taxableIncome)
+        private MedicareLevyItems defineMedicareBracket(MedicareLevyItems medicareLevyItems, double taxableIncome, DeductionParameterItems deductionParameterItems)
         {
             switch (taxableIncome)
             {
-                case double n when n <= medicareLevyItems.medicareBrackets.first:
+                case double n when n <= deductionParameterItems.firstMedicareBracket:
                     medicareLevyItems.percentageOfIncome = 0;
                     medicareLevyItems.excessValue = null;
                     break;
-                case double n when n > medicareLevyItems.medicareBrackets.first && n <= medicareLevyItems.medicareBrackets.second:
+                case double n when n > deductionParameterItems.firstMedicareBracket && n <= deductionParameterItems.secondMedicareBracket:
                     medicareLevyItems.percentageOfIncome = 10;
                     medicareLevyItems.excessValue = 21335;
                     break;
-                case double n when n >= medicareLevyItems.medicareBrackets.third:
+                case double n when n >= deductionParameterItems.thirdMedicareBracket:
                     medicareLevyItems.percentageOfIncome = 2;
                     medicareLevyItems.excessValue = null;
                     break;
