@@ -11,12 +11,14 @@ namespace TaxAPI.Calculators
         {
             TaxableIncomeCalculator taxableIncomeCalculator = new TaxableIncomeCalculator();
             MedicareLevyCalculator medicareLevyCalculator = new MedicareLevyCalculator();
+            BudgetRepairLevyCalculator budgetRepairLevyCalculator = new BudgetRepairLevyCalculator();
 
             // Calculate taxable income (also calculates super contribution)
             salary = taxableIncomeCalculator.calculateTaxableIncome(salary);
             // Calculate Medicare Levy
             salary = medicareLevyCalculator.calculateMedicareLevy(salary);
-
+            // Calculate Budget repair levy
+            salary = budgetRepairLevyCalculator.calculateBudgetRepairLevy(salary);
             return salary;
         }
     }

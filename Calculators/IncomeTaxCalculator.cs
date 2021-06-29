@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TaxAPI.Models
+namespace TaxAPI.Calculators
 {
-    public class MedicareLevyItems : TaxPercentages
+    public class IncomeTaxCalculator
     {
-        
     }
 }
