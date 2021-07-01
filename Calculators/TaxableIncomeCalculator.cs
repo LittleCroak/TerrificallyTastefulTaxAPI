@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using TaxAPI.Models;
 
 namespace TaxAPI.Calculators
@@ -25,7 +23,7 @@ namespace TaxAPI.Calculators
             salary.superContribution = calculateSuper.getSuper(salary);
 
             // Define Taxable income
-            salary.taxableIncome = salary.grossPackage - salary.superContribution;
+            salary.taxableIncome = Math.Round(salary.grossPackage - salary.superContribution, 2);
 
             return salary;
         }

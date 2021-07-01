@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TaxAPI.Models
+﻿namespace TaxAPI.Models
 {
     public class SalaryItems
     {
@@ -13,8 +8,8 @@ namespace TaxAPI.Models
         public double taxableIncome { get; set; }
         public DeductionItems deductionItems { get; set; }
         public double netIncome { get; set; }
-        public double payPacketAmount { get; set; }
         public string payFrequency { get; set; }
+        public double payFrequencyAmount { get; set; }
 
         public SalaryItems()
         {

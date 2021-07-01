@@ -1,6 +1,8 @@
 ﻿namespace TaxAPI.Calculators
 {
     using TaxAPI.Models;
+    using System;
+
     public class NetPayCalculator
     {
         public SalaryItems netPayCalculator(SalaryItems salary)
@@ -12,7 +14,7 @@
             TotalDeductions totalDeductions = new TotalDeductions();
             var deductions = totalDeductions.totalDeductions(salary);
 
-            salary.netIncome = (salary.grossPackage - salary.superContribution - deductions);
+            salary.netIncome = Math.Round((salary.grossPackage - salary.superContribution - deductions), 2);
 
             return salary;
         }

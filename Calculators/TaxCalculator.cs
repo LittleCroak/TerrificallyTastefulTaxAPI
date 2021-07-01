@@ -14,6 +14,7 @@ namespace TaxAPI.Calculators
             BudgetRepairLevyCalculator budgetRepairLevyCalculator = new BudgetRepairLevyCalculator();
             IncomeTaxCalculator incomeTaxCalculator = new IncomeTaxCalculator();
             NetPayCalculator netPayCalculator = new NetPayCalculator();
+            PayFrequencyCalculator payFrequencyCalculator = new PayFrequencyCalculator();
 
             // Calculate taxable income (also calculates super contribution)
             salary = taxableIncomeCalculator.calculateTaxableIncome(salary);
@@ -26,6 +27,7 @@ namespace TaxAPI.Calculators
             // Calculate NetPay
             salary = netPayCalculator.netPayCalculator(salary);
             // Calculate the pay frequency to display
+            salary = payFrequencyCalculator.calculatePayFrequency(salary);
 
             return salary;
         }
