@@ -19,7 +19,7 @@
 
             // Calculate based on the defined Medicare bracket values
             DeductionCalculator deductionCalculator = new DeductionCalculator();
-            salary.deductionItems.medicareLevy = deductionCalculator.deductionCalculator(salary.taxableIncome, medicareBrackets, 0);
+            salary.deductionItems.medicareLevy = deductionCalculator.deductionCalculator(salary.taxableIncome, medicareBrackets);
 
             return salary;
         }

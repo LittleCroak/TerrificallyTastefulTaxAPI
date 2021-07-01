@@ -1,6 +1,4 @@
-﻿
-
-namespace TaxAPI.Models
+﻿namespace TaxAPI.Models
 {
     public class BudgetRepairLevyItems : TaxPercentages 
     {

@@ -12,6 +12,8 @@ namespace TaxAPI.Calculators
             TaxableIncomeCalculator taxableIncomeCalculator = new TaxableIncomeCalculator();
             MedicareLevyCalculator medicareLevyCalculator = new MedicareLevyCalculator();
             BudgetRepairLevyCalculator budgetRepairLevyCalculator = new BudgetRepairLevyCalculator();
+            IncomeTaxCalculator incomeTaxCalculator = new IncomeTaxCalculator();
+            NetPayCalculator netPayCalculator = new NetPayCalculator();
 
             // Calculate taxable income (also calculates super contribution)
             salary = taxableIncomeCalculator.calculateTaxableIncome(salary);
@@ -19,6 +21,12 @@ namespace TaxAPI.Calculators
             salary = medicareLevyCalculator.calculateMedicareLevy(salary);
             // Calculate Budget repair levy
             salary = budgetRepairLevyCalculator.calculateBudgetRepairLevy(salary);
+            // Calculate income tax
+            salary = incomeTaxCalculator.calculateIncomeTax(salary);
+            // Calculate NetPay
+            salary = netPayCalculator.netPayCalculator(salary);
+            // Calculate the pay frequency to display
+
             return salary;
         }
     }

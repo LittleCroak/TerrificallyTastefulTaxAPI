@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TaxAPI.Models
+﻿namespace TaxAPI.Models
 {
+    using System.Collections;
+
     public class DeductionItems
     {
         public long id { get; set; } 
@@ -12,5 +9,6 @@ namespace TaxAPI.Models
         public double medicareLevy { get; set; }
         public double budgetRepairLevy { get; set; }
         public double incomeTax { get; set; }
+
     }
 }

@@ -7,5 +7,7 @@
 
         // Excess values are used to calculate how much of a percentage to use when over a certain threshold
         public double? excessValue { get; set; }
+
+        public double taxAddition { get; set; }
     }
 }

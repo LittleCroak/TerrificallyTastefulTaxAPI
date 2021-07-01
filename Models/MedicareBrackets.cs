@@ -18,6 +18,8 @@
             firstExcessValue = null;
             secondExcessValue = 21335;
             thirdExcessValue = null;
+
+            bracketLabel = "medicare";
         }
     }
 }

@@ -14,6 +14,8 @@
             // Define the excess value:
             firstExcessValue = null;
             secondExcessValue = 180000;
+
+            bracketLabel = "budget_repair";
         }
     }
 }
