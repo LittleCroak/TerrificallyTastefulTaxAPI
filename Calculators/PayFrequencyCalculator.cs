@@ -2,6 +2,8 @@
 {
     using TaxAPI.Models;
     using System;
+    using Microsoft.AspNetCore.Http;
+
 
     public class PayFrequencyCalculator
     {
@@ -14,15 +16,25 @@
 
         private double defineFrequency(string payFrequencyChoice)
         {
-            switch(payFrequencyChoice)
+            try
             {
-                case "weekly":
-                    return 52;
-                case "fortnightly":
-                    return 26;
-                case "monthly":
-                    return 12;
+                switch (payFrequencyChoice)
+                {
+                    case "weekly":
+                        return 52;
+                    case "fortnightly":
+                        return 26;
+                    case "monthly":
+                        return 12;
+                    default:
+                        throw new Exception();
+                }
             }
+            catch (Exception e)
+            {
+                throw new ArgumentException();
+            }
+
             return 0;
         }
 

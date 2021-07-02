@@ -79,8 +79,15 @@ namespace TaxAPI.Controllers
         public async Task<ActionResult<SalaryItems>> PostSalaryItems(SalaryItems salaryItems)
         {
             TaxCalculator taxCalculator = new TaxCalculator();
-            salaryItems = taxCalculator.calculateTax(salaryItems);
 
+            try
+            {
+                salaryItems = taxCalculator.calculateTax(salaryItems);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
 
             _context.SalaryItems.Add(salaryItems);
             await _context.SaveChangesAsync();
