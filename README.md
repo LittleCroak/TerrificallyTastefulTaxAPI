@@ -18,6 +18,9 @@ My first thougt was: "Ah! I will simply connect my console app to an existing Au
 
 It was a good experience to build this up and I know it is not perfect and it could use some work, and as someone who is always open to critique and learning something new: Please let me know if you spot anything I should change.
 
+You can run this locally and utilize my Console app (https://github.com/LittleCroak/PowerfullyPunchyPayPacketApp) which I designed to be utilized with this API. 
+To use it though you will need to change the network settings depending on your own local sockets etc.
+
 This Tax API is correct as of 2020s tax year and I have compared the answers it gives to paycalculator.com.au as a comparison to ensure proper answers.
 
 NOTE: It goes without saying, but just in case: Do not use this app as tax/financial advice.
