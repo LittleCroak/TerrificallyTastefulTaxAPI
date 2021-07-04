@@ -1,4 +1,4 @@
-# TerrificallyTastefulTaxAPI
+# The Terrifically Tasteful TaxAPI
 A simple tax API that does Australian tax calculations given a Gross pay packet
 
 I have built this to play around with APIs and as general OOP practice. 
