@@ -14,7 +14,7 @@ Medicare Levy Budget Repair Levy Income tax
 Net income (annual) 
 Pay packet amount
 
-My first though was: "Ah! I will simply connect my console app to an existing Australian API that gives tax information! Easy!"... however no such public API exists in Australia! Not to be deterred (and if you see my sudoku calculator you will know) I decided to hit this one with a little more effort than usual.
+My first thougt was: "Ah! I will simply connect my console app to an existing Australian API that gives tax information! Easy!"... however no such public API exists in Australia! Not to be deterred (and if you see my sudoku calculator you will know) I decided to hit this one with a little more effort than usual.
 
 It was a good experience to build this up and I know it is not perfect and it could use some work, and as someone who is always open to critique and learning something new: Please let me know if you spot anything I should change.
 
