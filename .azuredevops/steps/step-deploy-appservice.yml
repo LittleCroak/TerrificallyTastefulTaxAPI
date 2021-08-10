@@ -1,0 +1,38 @@
+parameters:
+- name: artifact
+  type: string
+
+- name: packageLocation
+  type: string
+
+- name: azureSubscription
+  type: string
+
+- name: appName
+  type: string
+
+- name: deployToSlot
+  type: string
+
+- name: slotName
+  type: string
+
+- name: resourceGroupName
+  type: string
+
+steps:
+- download: current
+  artifact: ${{parameters.artifact}}
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy AppService'
+  inputs:
+    azureSubscription: ${{parameters.azureSubscription}}
+    WebAppName: ${{parameters.appName}}
+    packageForLinux: ${{parameters.packageLocation}}
+    enableCustomDeployment: true
+    enableXmlTransform: true
+    removeAdditionalFilesFlag: true
+    filesFlagExcludeFilesFromAppDataFlag: true
+    DeployToSlotOrASEFlag: ${{parameters.deployToSlot}}
+    SlotName: ${{parameters.slotName}}
+    ResourceGroupName: ${{parameters.resourceGroupName}}

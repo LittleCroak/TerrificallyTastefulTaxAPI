@@ -1,0 +1,12 @@
+parameters:
+- name: buildVersion
+  type: string
+
+steps:
+- task: CmdLine@2
+  displayName: 'Tag Build'
+  inputs:
+    script: |
+      ECHO Tagging build ${{parameters.buildVersion}}
+      git tag ${{parameters.buildVersion}}
+      git push origin ${{parameters.buildVersion}}

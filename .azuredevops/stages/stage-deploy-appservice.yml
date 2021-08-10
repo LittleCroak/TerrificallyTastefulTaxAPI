@@ -1,0 +1,42 @@
+parameters:
+- name: environment
+  type: string
+
+- name: poolName
+  type: string
+
+- name: poolVmImage
+  type: string
+
+stages:
+- stage: ${{parameters.environment}}_DeployAppService
+  displayName: ${{parameters.environment}}_DeployAppService
+  dependsOn: [BuildSolution]
+
+  jobs:
+  - deployment: AppServiceDeployment
+    variables:
+    - group: ${{parameters.environment}}
+    - name: Release.EnvironmentName
+      value: ${{parameters.environment}}
+    displayName: ${{parameters.environment}} App Service Deploy
+    environment: ${{parameters.environment}}
+    pool:
+      name: $(poolName)
+      vmImage: $(poolVmImage)
+    workspace:
+      clean: all
+    strategy:
+      runOnce:
+        deploy:
+          steps:      
+          - checkout: none
+          - template: ../steps/step-deploy-appservice.yml
+            parameters:
+              artifact: 'SolutionArtifact'
+              packageLocation: '$(Pipeline.Workspace)/SolutionArtifact/*.zip'
+              azureSubscription: $(azureSubscription)
+              appName: $(apiAppName)
+              deployToSlot: $(deployToSlot)
+              slotName: $(slotName)
+              resourceGroupName: $(resourceGroupName)

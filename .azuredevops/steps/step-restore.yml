@@ -1,0 +1,10 @@
+parameters:
+- name: solution
+  type: string
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Restore Solution'
+  inputs:
+    command: 'restore'
+    projects: ${{parameters.solution}}

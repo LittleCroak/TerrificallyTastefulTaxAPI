@@ -1,0 +1,23 @@
+parameters:
+- name: solution
+  type: string
+
+- name: buildConfiguration
+  type: string
+
+- name: coverageExcludePattern
+  type: string
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Test Solution'
+  inputs:
+    command: 'test'
+    projects: ${{parameters.solution}}
+    publishTestResults: true
+    arguments: '--configuration ${{parameters.buildConfiguration}} /p:CollectCoverage=true /p:CoverletOutput=./TestResults/Coverage/ /p:CoverletOutputFormat=cobertura /p:Exclude="${{parameters.coverageExcludePattern}}"'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/TestResults/Coverage/coverage.cobertura.xml'

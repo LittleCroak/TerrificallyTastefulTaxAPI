@@ -1,0 +1,20 @@
+steps:
+- powershell: |
+        $BranchName = '$(Build.SourceBranchName)'
+        $BuildNumber = '$(Version.Major).$(Version.Minor).$(Version.Patch)'
+        Write-Host "##vso[task.setvariable variable=AssemblyVersion;isOutput=true]$($BuildNumber)"
+        if ($BranchName -eq 'main') {
+            Write-Host "##vso[build.updatebuildnumber]$($BuildNumber)"
+        }
+        elseif ($BranchName -eq 'develop') {
+            Write-Host "##vso[build.updatebuildnumber]$($BuildNumber)-alpha"
+        }
+        else {
+            Write-Host "##vso[build.updatebuildnumber]$($BuildNumber)-$($BranchName)"
+        }
+  displayName: 'Set Build Number'
+  name: VersionNumbers
+- powershell: |
+    Write-Host "BuildNumber is $(Build.BuildNumber)"
+    Write-Host "AssemblyVersion is $(VersionNumbers.AssemblyVersion)"
+  displayName: 'Show Version'

@@ -1,0 +1,69 @@
+parameters:
+- name: poolName
+  type: string
+
+- name: poolVmImage
+  type: string
+
+- name: solution
+  type: string
+
+- name: buildConfiguration
+  type: string
+
+- name: coverageExcludePattern
+  type: string
+  default: ''
+
+- name: artifactPath
+  type: string
+
+stages:
+- stage: BuildSolution
+  dependsOn: []
+ 
+  jobs:
+  - job: BuildFunctionApp
+    displayName: 'Build, Test and Publish'
+    pool:
+      name: ${{parameters.poolName}}
+      vmImage: ${{parameters.poolVmImage}}
+
+    steps:
+    - template: ../steps/step-checkout.yml
+    - template: ../steps/step-versioning.yml
+
+    # Build
+    - template: ../steps/step-restore.yml
+      parameters:
+        solution: ${{parameters.solution}}
+
+    - template: ../steps/step-build.yml
+      parameters:
+        solution: ${{parameters.solution}}
+        buildConfiguration: ${{parameters.buildConfiguration}}
+        assemblyVersion: $(VersionNumbers.AssemblyVersion)
+        buildVersion: $(Build.BuildNumber)
+        outputDirectory: $(Pipeline.Workspace)/BuildOutput/Web
+        name: Web
+
+    # Test
+    - template: ../steps/step-test.yml
+      parameters:
+        solution: ${{parameters.solution}}
+        buildConfiguration: ${{parameters.buildConfiguration}}
+        coverageExcludePattern: ${{parameters.coverageExcludePattern}}
+
+    # Publish
+    - ${{ if in(variables['Build.Reason'], 'Manual', 'IndividualCI', 'BatchedCI') }}:
+        - template: ../steps/step-publish-solution.yml
+          parameters:
+            buildConfiguration: ${{parameters.buildConfiguration}}
+            assemblyVersion: $(VersionNumbers.AssemblyVersion)
+            buildVersion: $(Build.BuildNumber)
+            artifact: 'SolutionArtifact'
+            artifactPath: ${{parameters.artifactPath}}
+
+        - template: ../steps/step-tag-source.yml
+          parameters:
+            buildVersion: $(Build.BuildNumber)

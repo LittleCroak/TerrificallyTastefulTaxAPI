@@ -1,0 +1,29 @@
+parameters:
+- name: buildConfiguration
+  type: string
+
+- name: assemblyVersion
+  type: string
+
+- name: buildVersion
+  type: string
+
+- name: artifact
+  type: string
+
+- name: artifactPath
+  type: string
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Publish Solution'
+  inputs:
+    command: publish
+    arguments: '--output ${{parameters.artifactPath}}\${{ parameters.artifact }} --configuration ${{parameters.buildConfiguration}};FileVersion=${{parameters.assemblyVersion}};Version=${{parameters.buildVersion}};EnvironmentName=Release'
+    modifyOutputPath: false
+    zipAfterPublish: true
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifact'
+  inputs:
+    targetPath: ${{ parameters.artifactPath }}\${{ parameters.artifact }}
+    artifact: ${{ parameters.artifact }}

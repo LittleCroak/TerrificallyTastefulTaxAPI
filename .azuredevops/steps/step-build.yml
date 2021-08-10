@@ -1,0 +1,26 @@
+parameters:
+- name: solution
+  type: string
+
+- name: buildConfiguration
+  type: string
+
+- name: assemblyVersion
+  type: string
+
+- name: buildVersion
+  type: string
+
+- name: outputDirectory
+  type: string
+
+- name: name
+  type: string
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build Solution ${{parameters.name}}'
+  inputs:
+    command: 'build'
+    projects: ${{parameters.solution}}
+    arguments: '--output ${{parameters.outputDirectory}} --configuration ${{parameters.buildConfiguration}};FileVersion=${{parameters.assemblyVersion}};Version=${{parameters.buildVersion}} -warnaserror --no-restore --disable-parallel -maxcpucount:1'

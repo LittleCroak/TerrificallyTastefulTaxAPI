@@ -1,0 +1,42 @@
+trigger:
+- main
+
+variables:
+- name: poolName
+  value: 'Azure Pipelines'
+- name: poolVmImage
+  value: 'windows-2019'
+- name: BuildPlatform
+  value : 'Any CPU'
+- name: BuildConfiguration
+  value: 'Release'
+- name: Solution
+  value: 'Veritec.MeetingManager.sln'
+
+#Versioning
+- name: Version.Major
+  value: 0
+- name: Version.Minor
+  value: 1
+- name: Version.Patch
+  value: $[counter(format('{0}.{1}', variables['Version.Major'], variables['Version.Minor']), 0)]
+
+pool:
+  name: $(PoolName)
+  vmImage: $(PoolVmImage)
+    
+stages:
+- template: stages/stage-build-solution.yml
+  parameters:
+    poolName: $(PoolName)
+    poolVmImage: $(PoolVmImage)
+    solution: $(Solution)
+    buildConfiguration: $(BuildConfiguration)
+    artifactPath: '$(Pipeline.Workspace)/PublishOutput'
+
+#- ${{ if and(in(variables['Build.Reason'], 'Manual', 'IndividualCI', 'BatchedCI'), eq(parameters.DisableDeploy, false)) }}:
+#    - template: stages/stage-deploy-appservice.yml
+#      parameters:
+#        environment: DEVELOPMENT
+#        poolName: $(poolName)
+#        poolVmImage: $(poolVmImage)
