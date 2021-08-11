@@ -11,7 +11,7 @@ variables:
 - name: BuildConfiguration
   value: 'Release'
 - name: Solution
-  value: 'Veritec.MeetingManager.sln'
+  value: 'TaxAPI.sln'
 
 #Versioning
 - name: Version.Major
